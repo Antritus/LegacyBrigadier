@@ -1,0 +1,3 @@
+rootProject.name = 'BrigadierBackport'
+
+include 'forge-1.7.10'

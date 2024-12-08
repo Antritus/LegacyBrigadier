@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "bet.astral.brigadier.forge.mixin",
+  "refmap": "mixins.legacybrigadier.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "common.BrigadierComponentMixin",
+    "common.TextComponentMessageMixin",
+    "common.TranslationComponentMixin",
+    "common.command.CommandHandlerMixin",
+    "common.entity.EntityMixin",
+    "common.network.ClientBoundTabCompletePacketMixin",
+    "common.network.NetHandlerPlayServerMixin",
+    "common.sender.BlockSenderMixin",
+    "common.sender.MinecraftServerMixin",
+    "common.sender.PlayerSenderMixin",
+    "common.sender.RConSenderMixin",
+    "common.server.MinecraftServerMixin",
+    "common.world.WorldMixin",
+    "server.command.ServerCommandManagerMixin"
+  ],
+  "client": [
+    "client.command.CommandHandlerClientMixin",
+    "client.gui.GuiChatMixin",
+    "client.network.NetHandlerPlayClientMixin"
+  ]
+}

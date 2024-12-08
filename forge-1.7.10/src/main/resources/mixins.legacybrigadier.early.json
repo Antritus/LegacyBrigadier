@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "bet.astral.brigadier.forge.mixin",
+  "refmap": "mixins.legacybrigadier.refmap.json",
+  "compatibilityLevel": "JAVA_8"
+}

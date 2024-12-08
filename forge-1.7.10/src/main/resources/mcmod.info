@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "legacybrigadier",
+    "name": "Legacy Brigadier",
+    "description": " ",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Antritus"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
