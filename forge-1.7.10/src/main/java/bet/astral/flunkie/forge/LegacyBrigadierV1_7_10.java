@@ -8,8 +8,10 @@ import bet.astral.flunkie.forge.network.ServerPacketHandler;
 import bet.astral.flunkie.forge.network.client.ClientBoundTabCompletePacket;
 import bet.astral.flunkie.forge.network.server.ServerBoundTabCompletePacket;
 import bet.astral.flunkie.network.PacketHandler;
+import bet.astral.flunkie.registry.INamespaceRegistry;
 import bet.astral.flunkie.text.JsonMessage;
 import bet.astral.flunkie.text.TranslationMessage;
+import bet.astral.flunkie.world.Block;
 import bet.astral.flunkie.world.World;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -152,5 +154,11 @@ public class LegacyBrigadierV1_7_10 extends LegacyBrigadier {
     @Override
     public PacketHandler.Client getPacketHandlerClient() {
         return clientNetwork;
+    }
+
+    @Override
+    public INamespaceRegistry<Block> getBlockRegistry() {
+        //noinspection unchecked
+        return (INamespaceRegistry<Block>) net.minecraft.block.Block.blockRegistry;
     }
 }

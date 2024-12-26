@@ -10,14 +10,15 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.LiteralMessage;
 import com.mojang.brigadier.Message;
 import com.mojang.brigadier.ParseResults;
+import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.StringRange;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.net.www.MessageHeader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,10 @@ public class CommandManager {
     private final LegacyCommandManager legacyCommandManager;
     public CommandManager(LegacyCommandManager legacyCommandManager){
         this.legacyCommandManager = legacyCommandManager;
+    }
+
+    public static <T> RequiredArgumentBuilder<CommandSourceStack, T> argument(String name, ArgumentType<T> argumentType){
+        return RequiredArgumentBuilder.argument(name, argumentType);
     }
 
     public <S extends CommandSourceStack> void register(LiteralArgumentBuilder<S> command){
@@ -86,9 +91,10 @@ public class CommandManager {
             if (parseResults.getExceptions().size() == 1) {
                 return parseResults.getExceptions().values().iterator().next();
             } else if (parseResults.getContext().getRange().isEmpty()) {
-//                return CommandSyntaxException.BUILT_IN_EXCEPTIONS.dispatcherUnknownCommand().createWithContext(parseResults.getReader());
+                // Unknown command
                 return ExecuteResult.UNKNOWN_COMMAND;
             } else {
+                // Returns unknown argument
                 return CommandSyntaxException.BUILT_IN_EXCEPTIONS.dispatcherUnknownArgument().createWithContext(parseResults.getReader());
             }
         }

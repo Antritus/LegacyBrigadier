@@ -2,8 +2,10 @@ package bet.astral.flunkie;
 
 import bet.astral.flunkie.command.CommandSourceStack;
 import bet.astral.flunkie.network.PacketHandler;
+import bet.astral.flunkie.registry.INamespaceRegistry;
 import bet.astral.flunkie.text.JsonMessage;
 import bet.astral.flunkie.text.TranslationMessage;
+import bet.astral.flunkie.world.Block;
 import bet.astral.flunkie.world.World;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -21,6 +23,10 @@ public abstract class LegacyBrigadier {
     }
 
     public abstract World getDefaultWorld();
+
+    public static INamespaceRegistry<Block> registryBlock() {
+        return getInstance().getBlockRegistry();
+    }
 
     public static TranslationMessage translationMessage(String message) {
         return getInstance().createTranslationMessage(message);
@@ -52,4 +58,6 @@ public abstract class LegacyBrigadier {
     public abstract JsonElement toJsonObj(Message message);
     public abstract PacketHandler.Server getPacketHandlerServer();
     public abstract PacketHandler.Client getPacketHandlerClient();
+
+    public abstract INamespaceRegistry<Block> getBlockRegistry();
 }

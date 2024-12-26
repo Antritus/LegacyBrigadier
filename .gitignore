@@ -1,8 +1,5 @@
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -40,4 +37,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-/forge-1.7.10
+/forge-1.7.10/run/
+/forge-1.7.10/eclipse/
+/forge-1.7.10/build/
+/forge-1.7.10/.gradle/
+/forge-1.7.10/gtnhShared/
+/logs/
