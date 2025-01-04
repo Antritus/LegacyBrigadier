@@ -3,6 +3,7 @@ package bet.astral.flunkie.forge.client.gui;
 import bet.astral.flunkie.command.SuggestionResult;
 import bet.astral.flunkie.forge.LegacyBrigadierV1_7_10;
 import bet.astral.flunkie.network.PacketHandler;
+import bet.astral.flunkie.tuple.Pair;
 import com.mojang.brigadier.context.StringRange;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
@@ -118,7 +119,7 @@ public class SuggestionGui extends Gui {
     }
 
     public boolean hasSuggestions(){
-        return suggestionList != null && !suggestionList.get(getCommand()).isEmpty();
+        return suggestionList != null && !suggestionList.get(getCommand()).getValueB().isEmpty();
     }
 
     public boolean matchesCurrentSuggestions(SuggestionResult result){
@@ -137,7 +138,11 @@ public class SuggestionGui extends Gui {
         Minecraft mc = Minecraft.getMinecraft();
         int baseY = mc.currentScreen.height - height - 12; // Adjust based on GUI layout.
         int lineHeight = mc.fontRenderer.FONT_HEIGHT + 2;  // Line height for rendering.
-        List<SuggestionList.Item> toRender = suggestionList.get(getCommand());
+        Pair<Boolean, List<SuggestionList.Item>> renderResult = suggestionList.get(getCommand());
+        boolean anyMatch = renderResult.getValueA();
+        TextField textField = (TextField) field;
+        textField.setRenderLatestRed(!anyMatch);
+        List<SuggestionList.Item> toRender = renderResult.getValueB();
         if (toRender == null || toRender.isEmpty()){
             return;
         }

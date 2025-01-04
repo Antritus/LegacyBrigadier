@@ -25,6 +25,7 @@
   "client": [
     "client.command.CommandHandlerClientMixin",
     "client.gui.GuiChatMixin",
-    "client.network.NetHandlerPlayClientMixin"
+    "client.network.NetHandlerPlayClientMixin",
+    "client.gui.GuiTextFieldMixin"
   ]
 }

@@ -2,6 +2,7 @@ package bet.astral.flunkie.forge.client.gui;
 
 import bet.astral.flunkie.command.SuggestionResult;
 import bet.astral.flunkie.forge.LegacyBrigadierV1_7_10;
+import bet.astral.flunkie.tuple.Pair;
 import com.google.common.collect.Lists;
 import com.mojang.brigadier.Message;
 import com.mojang.brigadier.suggestion.Suggestion;
@@ -98,9 +99,9 @@ public class SuggestionList {
         return page;
     }
 
-    public List<Item> get(String cmd) {
+    public Pair<Boolean, List<Item>> get(String cmd) {
         List<Item> returnItems = new ArrayList<>();
-        if (items.isEmpty()) return returnItems; // Return an empty list if there are no items
+        if (items.isEmpty()) return new Pair<>(false, returnItems); // Return an empty list if there are no items
 
         // Filter items based on the command
         List<Item> newItems = filter(items, cmd);
@@ -110,7 +111,7 @@ public class SuggestionList {
         if (totalItems == 0) {
             selection = 0;
             page = 0;
-            return returnItems; // Return an empty list if filtered list is empty
+            return new Pair<>(false, returnItems); // Return an empty list if filtered list is empty
         }
 
         int start = page * MAX_ITEMS_PER_PAGE;
@@ -132,13 +133,17 @@ public class SuggestionList {
             selection = totalItems - 1;
         }
 
+        boolean anyMatch = false;;
         for (int i = 0; i < size; i++) {
             Item item = displayItems.get(i);
             // Highlight the selected line
             item.currentLine = (selection == start + i);
             returnItems.add(item);
+            if (cmd.equalsIgnoreCase(item.text.toString())){
+                anyMatch = true;
+            }
         }
-        return returnItems;
+        return new Pair<>(anyMatch, returnItems);
     }
 
     private List<Item> filter(List<Item> items, String command){
