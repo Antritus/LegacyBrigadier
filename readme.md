@@ -23,3 +23,43 @@ I've implemented the 1.21.4 command suggestion system to the 1.7.10 command sugg
 It now shows them in the correct position above everything else in the chat box. 
 
 https://www.youtube.com/watch?v=0-1AxBUvNmA&list=PLK5blL1iKf7YQzdKSh5VS4DHu72gNhhun&index=2
+
+## What did I change?
+### "API" to allow legacy and modern brigadier to be used.
+https://github.com/Antritus/LegacyBrigadier/tree/master/src/main/java/bet/astral/flunkie
+
+The implementation of the brigadier command library to support legacy and brigadier commands
+https://github.com/Antritus/LegacyBrigadier/blob/master/src/main/java/bet/astral/flunkie/command/CommandManager.java
+
+Rewrite of the networking to server and client
+https://github.com/Antritus/LegacyBrigadier/tree/master/src/main/java/bet/astral/flunkie/network
+
+Text components for minecraft Language (for example converts key.lang to Language) and text components (this is text)
+https://github.com/Antritus/LegacyBrigadier/tree/master/src/main/java/bet/astral/flunkie/text
+
+Basic registry interfaces to be implemented by the client
+https://github.com/Antritus/LegacyBrigadier/tree/master/src/main/java/bet/astral/flunkie/registry
+
+### 1.7.10 Minecraft Client and Server
+https://github.com/Antritus/LegacyBrigadier/tree/master/forge-1.7.10
+
+I rewrote the entire suggestion list system from the client side to have proper control over everything in the suggestions.
+
+https://github.com/Antritus/LegacyBrigadier/blob/master/forge-1.7.10/src/main/java/bet/astral/flunkie/forge/client/gui/SuggestionList.java
+
+Wrote a new class to render suggestions in the chat when typing commands
+https://github.com/Antritus/LegacyBrigadier/blob/49f5fc5037734f00569ee71ad74ecaed3d8bba9f/forge-1.7.10/src/main/java/bet/astral/flunkie/forge/client/gui/SuggestionGui.java#L133C1-L184C6
+
+Also made methods to receive legacy packets and more modern packets in the same class
+https://github.com/Antritus/LegacyBrigadier/blob/49f5fc5037734f00569ee71ad74ecaed3d8bba9f/forge-1.7.10/src/main/java/bet/astral/flunkie/forge/client/gui/SuggestionGui.java#L186C1-L219C6
+
+Used "Mixin"s to overwrite or add to methods in the minecraft source. Basically adding more code to the minecraft server/client to have it run like I want it to run. 
+Mixins are required for this to have the client and server work like I want with the brigadier command library
+
+https://github.com/Antritus/LegacyBrigadier/tree/master/forge-1.7.10/src/main/java/bet/astral/flunkie/forge/mixin
+
+This is the command manager overwrite
+
+https://github.com/Antritus/LegacyBrigadier/blob/master/forge-1.7.10/src/main/java/bet/astral/flunkie/forge/mixin/common/command/CommandHandlerMixin.java
+
+
